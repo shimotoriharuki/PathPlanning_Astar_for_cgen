@@ -2,8 +2,8 @@ function shortcut_course = computeAstar(map, start, goal, size_x, size_y)
     % % -----------A star開始------------ %
     x = start(1, 1);
     y = start(2, 1);
-    pre_x = x;
-    pre_y = y;
+%     pre_x = x;
+%     pre_y = y;
 
 %     cost_table = [1, 1, 1;
 %                   1, 0, 1;
@@ -12,13 +12,13 @@ function shortcut_course = computeAstar(map, start, goal, size_x, size_y)
                   0, 0, 0;
                   0, 0, 0];
 
-    open_list = [];
-%     init_node.x = -1;
-%     init_node.y = -1;
-%     init_node.score = 99999;
-%     init_node.g_cost = 99999;
-%     init_node.h_cost = 99999;
-%     open_list = repmat(init_node, 1, 10000);
+%     open_list = [];
+    init_node.x = -1;
+    init_node.y = -1;
+    init_node.score = uint16(9999);
+    init_node.g_cost = uint16(9999);
+    init_node.h_cost = uint16(9999);
+    open_list = repmat(init_node, 1, 999);
     [map, open_list] = openAroundNodeDP(map, open_list, x, y, cost_table, size_x, size_y, goal); % スタートノードの周りをオープン
 
     count = 0;
@@ -29,8 +29,8 @@ function shortcut_course = computeAstar(map, start, goal, size_x, size_y)
 %         cost_table = map.getCostTable(x, y, pre_x, pre_y); % コストテーブルを更新 
         [map, open_list] = openAroundNodeDP(map, open_list, x, y, cost_table, size_x, size_y, goal);
 
-        pre_x = x;
-        pre_y = y;
+%         pre_x = x;
+%         pre_y = y;
 
         count = count + 1;
 
@@ -40,16 +40,18 @@ function shortcut_course = computeAstar(map, start, goal, size_x, size_y)
 
     % % -----------最短経路の座標を取得------------ %
 %     map.shorter_path_grid(y, x) = 2;
-    store_x = [];
-    store_y = [];
+    store_x = zeros(1, 9999);
+    store_y = zeros(1, 9999);
+    cnt = 1;
     while x ~= start(1, 1) || y ~= start(2, 1)
 
         temp_xy = map(y, x).parent;
-        x = temp_xy(1);
-        y = temp_xy(2);
+        x = double(temp_xy(1));
+        y = double(temp_xy(2));
 
-        store_x = [store_x, x];
-        store_y = [store_y, y];
+        store_x(cnt) = x;
+        store_y(cnt) = y;
+        cnt = cnt + 1;
 
 %         map.shorter_path_grid(y, x) = 2;
     end

@@ -54,8 +54,8 @@ size_y = max(course(2, :)) - min(course(2, :)) + 1; % yのベクトルの最大�
 
 remaining_course = course;
 store_course = [];
-% for i = 1 : 10
-while 1
+for i = 1 :11
+% while 1
     % コースを交差点で切る
     [trimming_course, remaining_course] = courseTrimer(remaining_course, 10, 19);
 
@@ -73,9 +73,9 @@ while 1
     [shortcut_course] = computeAstar(map, start, goal, size_x, size_y);
 
     store_course = [store_course, shortcut_course];
-    if trimming_course(1, end) == goal_x - 1 && trimming_course(2, end) == goal_y - 1
-        break;
-    end
+%     if trimming_course(1, end) == goal_x - 1 && trimming_course(2, end) == goal_y - 1
+%         break;
+%     end
 end
 
 figure(2)

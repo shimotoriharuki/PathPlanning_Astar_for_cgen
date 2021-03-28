@@ -5,6 +5,7 @@ function map = createMap(size_x, size_y, course_data, expantion)
     node.h_cost = uint16(0);
     node.score = uint16(0);
     node.g_cost = uint16(0);
+    node.parent = [ uint16(0),  uint16(0)];
 
     empty_map = repmat(node, size_y, size_x); % 行、列　＝　y, x
 
@@ -29,7 +30,7 @@ function map = createMap(size_x, size_y, course_data, expantion)
                     y = size_y;
                 end
 
-                empty_map(y, x).obstacle = 0;
+                empty_map(y, x).obstacle = uint16(0);
             end
         end
     end
