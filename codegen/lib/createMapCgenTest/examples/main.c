@@ -5,7 +5,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 26-Mar-2021 19:12:49
+ * C/C++ source code generated on  : 29-Mar-2021 16:16:13
  */
 
 /*************************************************************************/
@@ -37,7 +37,6 @@
 #include "main.h"
 #include "createMapCgenTest.h"
 #include "createMapCgenTest_terminate.h"
-#include "createMapCgenTest_types.h"
 
 /* Function Declarations */
 static void main_createMapCgenTest(void);
@@ -49,9 +48,8 @@ static void main_createMapCgenTest(void);
  */
 static void main_createMapCgenTest(void)
 {
-  struct0_T ret[9];
   /* Call the entry-point 'createMapCgenTest'. */
-  createMapCgenTest(ret);
+  createMapCgenTest();
 }
 
 /*
