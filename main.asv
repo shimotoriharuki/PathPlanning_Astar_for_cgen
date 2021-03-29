@@ -54,7 +54,7 @@ size_y = max(course(2, :)) - min(course(2, :)) + 1; % yのベクトルの最大�
 
 remaining_course = course;
 store_course = [];
-for i = 1 : 1
+for i = 1 : 4
 % while 1
     % コースを交差点で切る
     [trimming_course, remaining_course] = courseTrimer(remaining_course, 10, 20);
@@ -67,8 +67,8 @@ for i = 1 : 1
     plotMap(map) % プロット
 
     % 最短経路を計算
-    start = [trimming_course(1, 1) + 1; trimming_course(2, 1) + 1];
-    goal = [trimming_course(1, end) + 1; trimming_course(2, end) + 1];
+    start = [trimming_course(1, 1); trimming_course(2, 1)];
+    goal = [trimming_course(1, end); trimming_course(2, end)];
 
 %     [shortcut_course] = computeAstar_mex(map, start, goal, size_x, size_y);
     [shortcut_course] = computeAstar(map, start, goal, size_x, size_y);

@@ -37,16 +37,7 @@ function [return_map, return_open_list] = openAroundNodeDP(map, open_list, ref_x
                     temp_open_list(k) = open_list(k).x;
                 end
                 index = find(temp_open_list < 0, 1);
-%                 index = min(index);
                 open_list(index) = temp_node;
-%                 disp(open_list(2));
-%                 for index = 1 : length(open_list)
-%                     if open_list(index).x == -1
-%                         open_list(index) = temp_node;
-%                         break;
-%                     end
-%                 end
-
 
                 map(y, x).parent = [uint16(ref_x),uint16(ref_y)]; %親ノードの位置を保存
             end
@@ -59,5 +50,4 @@ function [return_map, return_open_list] = openAroundNodeDP(map, open_list, ref_x
     end
     return_map = map;
     return_open_list = open_list;
-
 end

@@ -26,7 +26,7 @@ function shortcut_course = computeAstar(map, start, goal, size_x, size_y)
     while x ~= goal(1, 1) || y ~= goal(2, 1)
 
         [x, y] = searchRefNode(open_list); % スコアが最も小さいノードのx, yを得る
-%         cost_table = map.getCostTable(x, y, pre_x, pre_y); % コストテーブルを更新 
+%         cost_table = getCostTable(x, y, pre_x, pre_y); % コストテーブルを更新 
         [map, open_list] = openAroundNodeDP(map, open_list, x, y, cost_table, size_x, size_y, goal);
 
 %         pre_x = x;
