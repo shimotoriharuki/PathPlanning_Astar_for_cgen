@@ -5,14 +5,13 @@
  * File: createMapCgenTest.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 26-Mar-2021 19:12:49
+ * C/C++ source code generated on  : 29-Mar-2021 16:16:13
  */
 
 #ifndef CREATEMAPCGENTEST_H
 #define CREATEMAPCGENTEST_H
 
 /* Include Files */
-#include "createMapCgenTest_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -22,7 +21,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern void createMapCgenTest(struct0_T ret[9]);
+extern void createMapCgenTest(void);
 
 #ifdef __cplusplus
 }

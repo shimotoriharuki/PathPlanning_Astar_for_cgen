@@ -946,8 +946,8 @@
     <param.deeplearning.EnableDeepLearning>false</param.deeplearning.EnableDeepLearning>
     <param.deeplearning.TargetLib>option.deeplearning.targetlibrary.none</param.deeplearning.TargetLib>
     <var.cfiTargetLibSuppression>false</var.cfiTargetLibSuppression>
-    <var.hasMatlabDeepLearningSupportPackage>false</var.hasMatlabDeepLearningSupportPackage>
-    <var.hasGpuDeepLearningSupportPackage>false</var.hasGpuDeepLearningSupportPackage>
+    <var.hasMatlabDeepLearningSupportPackage>true</var.hasMatlabDeepLearningSupportPackage>
+    <var.hasGpuDeepLearningSupportPackage>true</var.hasGpuDeepLearningSupportPackage>
     <param.tensorrt.DataType>option.tensorrt.datatype.fp32</param.tensorrt.DataType>
     <param.tensorrt.DataPath />
     <param.tensorrt.NumCalibrationBatches>0</param.tensorrt.NumCalibrationBatches>
@@ -1066,6 +1066,8 @@
       <param.deeplearning.EnableDeepLearning />
       <param.deeplearning.TargetLib />
       <var.cfiTargetLibSuppression />
+      <var.hasMatlabDeepLearningSupportPackage />
+      <var.hasGpuDeepLearningSupportPackage />
       <param.tensorrt.DataType />
       <param.tensorrt.DataPath />
       <param.tensorrt.NumCalibrationBatches />
@@ -1126,7 +1128,7 @@
     </unset>
     <fileset.entrypoints>
       <file custom-data-expanded="false" value="${PROJECT_ROOT}\computeAstar.m">
-        <Marker>1616919621725</Marker>
+        <Marker>1616924002784</Marker>
       </file>
     </fileset.entrypoints>
     <fileset.testbench />
@@ -1143,8 +1145,8 @@
           </Input>
           <Input Name="start" typeId="3" />
           <Input Name="goal" typeId="3" />
-          <Input Name="size_x" typeId="4" />
-          <Input Name="size_y" typeId="4" />
+          <Input Name="size_x" typeId="3" />
+          <Input Name="size_y" typeId="3" />
           <idpTable>
             <type typeId="0">
               <Class>struct</Class>
@@ -1174,16 +1176,7 @@
               <Complex>false</Complex>
             </type>
             <type typeId="3">
-              <Class>double</Class>
-              <Size>2 x 1</Size>
-              <Value />
-              <InitialValue />
-              <UserDefined>false</UserDefined>
-              <Complex>false</Complex>
-              <Sparse>false</Sparse>
-            </type>
-            <type typeId="4">
-              <Class>double</Class>
+              <Class>&lt;Undefined&gt;</Class>
               <Size>1 x 1</Size>
               <Value />
               <InitialValue />

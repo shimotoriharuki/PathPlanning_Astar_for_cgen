@@ -5,7 +5,7 @@
  * File: _coder_createMapCgenTest_api.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 26-Mar-2021 19:12:49
+ * C/C++ source code generated on  : 29-Mar-2021 16:16:13
  */
 
 #ifndef _CODER_CREATEMAPCGENTEST_API_H
@@ -16,16 +16,6 @@
 #include "tmwtypes.h"
 #include <string.h>
 
-/* Type Definitions */
-#ifndef typedef_struct0_T
-#define typedef_struct0_T
-typedef struct {
-  uint16_T obstacle;
-  uint16_T status;
-  uint8_T parent[2];
-} struct0_T;
-#endif /* typedef_struct0_T */
-
 /* Variable Declarations */
 extern emlrtCTX emlrtRootTLSGlobal;
 extern emlrtContext emlrtContextGlobal;
@@ -35,7 +25,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void createMapCgenTest(struct0_T ret[9]);
+void createMapCgenTest(void);
 
 void createMapCgenTest_api(const mxArray **plhs);
 

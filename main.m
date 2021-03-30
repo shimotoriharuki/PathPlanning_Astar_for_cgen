@@ -26,7 +26,7 @@ clear
 % course_x = round(sin(1 * num) * 10); %cm
 % course_y = round(sin(4 * num) * 8); %cm
 
-fileName = 'course_data/2019AllJapan.txt';
+fileName = 'course_data/2019East.txt';
 positions = readmatrix(fileName); %[m}
 positions = positions .* 100; %cm
 course_x = round(positions(:, 1)');
@@ -54,10 +54,10 @@ size_y = max(course(2, :)) - min(course(2, :)) + 1; % yのベクトルの最大�
 
 remaining_course = course;
 store_course = [];
-% for i = 1 :11
+% for i = 1 : 1
 while 1
     % コースを交差点で切る
-    [trimming_course, remaining_course] = courseTrimer(remaining_course, 10, 21);
+    [trimming_course, remaining_course] = courseTrimer(remaining_course, 10, 25);
 
     % マップを作成する
     expantion = round(8); %cm 膨張させる大きさ
@@ -67,11 +67,11 @@ while 1
     plotMap(map) % プロット
 
     % 最短経路を計算
-    start = [trimming_course(1, 1); trimming_course(2, 1)];
-    goal = [trimming_course(1, end); trimming_course(2, end)];
+    start = [trimming_course(1, 1) + 1; trimming_course(2, 1) + 1];
+    goal = [trimming_course(1, end) + 1; trimming_course(2, end) + 1];
 
-    [shortcut_course] = computeAstar_mex(map, start, goal, size_x, size_y);
-%     [shortcut_course] = computeAstar(map, start, goal, size_x, size_y);
+%     [shortcut_course] = computeAstar_mex(map, start, goal, size_x, size_y);
+    [shortcut_course] = computeAstar(map, start, goal, size_x, size_y);
 
 
     store_course = [store_course, shortcut_course];
