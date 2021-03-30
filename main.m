@@ -52,12 +52,13 @@ goal_y = course(2, end) + 1;
 size_x = max(course(1, :)) - min(course(1, :)) + 1; % xのベクトルの最大値-最小値でマップのx方向サイズを計算 
 size_y = max(course(2, :)) - min(course(2, :)) + 1; % yのベクトルの最大値-最小値でマップのy方向サイズを計算
 
-flag_table = getFlagTable(course, 10, 10);
+% flag_table = getFlagTable(course, 10, 10);
 remaining_course = course;
 store_course = [];
 % for i = 1 : 2
 while 1
     % コースを交差点で切る
+    flag_table = getFlagTable(remaining_course, 10, 10);
     [trimming_course, remaining_course, flag_table] = courseTrimer(remaining_course, flag_table);
 
     % マップを作成する
