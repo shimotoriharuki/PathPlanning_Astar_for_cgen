@@ -5,29 +5,19 @@
  * File: createMapCgenTest.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 26-Mar-2021 19:12:49
+ * C/C++ source code generated on  : 29-Mar-2021 16:16:13
  */
 
 /* Include Files */
 #include "createMapCgenTest.h"
-#include "createMapCgenTest_types.h"
 
 /* Function Definitions */
 /*
- * Arguments    : struct0_T ret[9]
+ * Arguments    : void
  * Return Type  : void
  */
-void createMapCgenTest(struct0_T ret[9])
+void createMapCgenTest(void)
 {
-  struct0_T s;
-  int i;
-  s.obstacle = 0U;
-  s.status = 0U;
-  s.parent[0] = 0U;
-  s.parent[1] = 0U;
-  for (i = 0; i < 9; i++) {
-    ret[i] = s;
-  }
 }
 
 /*

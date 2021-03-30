@@ -54,10 +54,10 @@ size_y = max(course(2, :)) - min(course(2, :)) + 1; % yのベクトルの最大�
 
 remaining_course = course;
 store_course = [];
-for i = 1 : 1
-% while 1
+% for i = 1 : 1
+while 1
     % コースを交差点で切る
-    [trimming_course, remaining_course] = courseTrimer(remaining_course, 10, 20);
+    [trimming_course, remaining_course] = courseTrimer(remaining_course, 10, 25);
 
     % マップを作成する
     expantion = round(8); %cm 膨張させる大きさ

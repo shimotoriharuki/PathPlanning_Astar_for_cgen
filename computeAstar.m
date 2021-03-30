@@ -44,17 +44,16 @@ function shortcut_course = computeAstar(map, start, goal, size_x, size_y)
     store_y = zeros(1, 9999);
     cnt = 1;
     while x ~= start(1, 1) || y ~= start(2, 1)
-
         temp_xy = map(y, x).parent;
         x = double(temp_xy(1));
         y = double(temp_xy(2));
+%         x = temp_xy(1);
+%         y = temp_xy(2);
 
         store_x(cnt) = x;
         store_y(cnt) = y;
         cnt = cnt + 1;
-
-%         map.shorter_path_grid(y, x) = 2;
     end
 
-    shortcut_course = [store_x; store_y];
+    shortcut_course = [flip(store_x(1 : cnt - 1)); flip(store_y(1 : cnt - 1))];% 順序が逆なのでflipでもとに戻す
 end
