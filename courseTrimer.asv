@@ -1,15 +1,6 @@
-function [trimming_course, remaining_course, return_flag_table] = courseTrimer(course, flag_table)
-    trimming_course = course;
-    remaining_course = course;
-    return_flag_table = flag_table;
-    
+function [trimming_course, remaining_course] = courseTrimer(course, flag_table)
     for i = 1 : length(flag_table)
-        if flag_table(i) == 1
-            trimming_course = [course(1, 1 : i); course(2, 1 : i)];
-            remaining_course = [course(1, i + 1 : end); course(2, i + 1 : end)];
-            return_flag_table = flag_table(i + 1 : end);
-            break;
-        end  
+        
     end
       
 %     for i = search_mergin : length(course) % search_meginから検索することで、同じ交差点を検知することを防ぐ

@@ -52,15 +52,16 @@ goal_y = course(2, end) + 1;
 size_x = max(course(1, :)) - min(course(1, :)) + 1; % xのベクトルの最大値-最小値でマップのx方向サイズを計算 
 size_y = max(course(2, :)) - min(course(2, :)) + 1; % yのベクトルの最大値-最小値でマップのy方向サイズを計算
 
+flag_table = getFlagTable(course, 10, 10);
 remaining_course = course;
 store_course = [];
-% for i = 1 : 1
+% for i = 1 : 2
 while 1
     % コースを交差点で切る
-    [trimming_course, remaining_course] = courseTrimer(remaining_course, 10, 25);
+    [trimming_course, remaining_course, flag_table] = courseTrimer(remaining_course, flag_table);
 
     % マップを作成する
-    expantion = round(8); %cm 膨張させる大きさ
+    expantion = round(10); %cm 膨張させる大きさ
     map = createMap(size_x, size_y, trimming_course, expantion); %バイナリマップ
     size_map = size_x * size_y;
 
@@ -93,6 +94,14 @@ store_course = store_course - ones_matrix; %行列のインデックスにする
 
 scatter(store_course(1, :), store_course(2, :), 'o')
 title('ショートカット')
+xlabel('x')
+ylabel('y')
+axis equal
+
+ave_course = getMovingAverage(store_course, 30);
+
+scatter(ave_course(1, :), ave_course(2, :), '+')
+title('移動平均')
 xlabel('x')
 ylabel('y')
 axis equal
