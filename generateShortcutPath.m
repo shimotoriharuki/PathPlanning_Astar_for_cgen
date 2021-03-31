@@ -39,8 +39,6 @@ function shortcut_course = generateShortcutPath(src_course)
             shortcut_course(:, k - 1 + index) = store_course(:, k);
         end
 
-    %     shortcut_course = [shortcut_course, shortcut_course];
-
         if trimming_course(1, end) == goal_x - 1 && trimming_course(2, end) == goal_y - 1
             break;
         end
