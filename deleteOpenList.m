@@ -15,12 +15,20 @@ function return_open_list = deleteOpenList(open_list, ref_x, ref_y)
                 open_list(i) = init_node;
                 
             else % その他は対象のやつを初期化して後ろに持っていく
-                open_list(i) = init_node;
-                first = open_list(1 : i - 1);
-                last = open_list(i : end);
-                last = circshift(last, -1);
+%                 open_list(i) = init_node;
                 
-                open_list = horzcat(first, last);
+                temp_list = repmat(init_node, 1, length(open_list));                
+                temp_list(1 : i - 1) = open_list(1 : i - 1);
+                temp_list(i : end - 1) = open_list(i + 1 : end);
+%                 temp_list(end) = init_node;
+                
+                open_list = temp_list;
+                
+%                 first = open_list(1 : i - 1);
+%                 last = open_list(i : end);
+%                 last = circshift(last, -1);
+                
+%                 open_list = horzcat(first, last);
             end
             break;
             

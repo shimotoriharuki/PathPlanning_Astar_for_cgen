@@ -14,7 +14,7 @@ function shortcut_course = generateShortcutPath(src_course)
     % flag_table = getFlagTable(course, 10, 10);
     remaining_course = course;
 %     shortcut_course = repmat(-1, 2, length(course(1, :)));
-    shortcut_course = repmat(-1, 2, 9999);
+shortcut_course = repmat(-1, 2, length(course(1, :)));
     disp(size(shortcut_course(1, :)))
     
 %     for i = 1 : 1

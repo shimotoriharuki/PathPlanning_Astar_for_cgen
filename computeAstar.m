@@ -36,7 +36,7 @@ function shortcut_course = computeAstar(map, start, goal, size_x, size_y)
 
     end
 
-    disp(count)
+%     disp(count)
 
     % % -----------最短経路の座標を取得------------ %
 %     map.shorter_path_grid(y, x) = 2;
