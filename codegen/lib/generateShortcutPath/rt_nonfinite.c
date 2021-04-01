@@ -5,7 +5,7 @@
  * File: rt_nonfinite.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 01-Apr-2021 14:26:53
+ * C/C++ source code generated on  : 01-Apr-2021 15:30:00
  */
 
 /*
@@ -16,6 +16,12 @@
 /* Include Files */
 #include "rt_nonfinite.h"
 #include <math.h>
+
+/* Custom Source Code */
+// SPDX-License-Identifier: GPL-3.0-only
+/*
+     Copyright (C) 2022  Haruki Shimotori. All right reserved.
+*/
 
 #if defined(__ICL) && __ICL == 1700
 #pragma warning(disable : 264)

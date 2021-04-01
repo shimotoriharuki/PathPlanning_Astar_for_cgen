@@ -5,7 +5,7 @@
  * File: _coder_generateShortcutPath_mex.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 01-Apr-2021 14:26:53
+ * C/C++ source code generated on  : 01-Apr-2021 15:30:00
  */
 
 #ifndef _CODER_GENERATESHORTCUTPATH_MEX_H
@@ -21,14 +21,13 @@ extern "C" {
 #endif
 
 /* Function Declarations */
+void generateShortcutPath_mexFunction(int32_T nlhs, mxArray *plhs[1],
+                                      int32_T nrhs, const mxArray *prhs[1]);
+
 MEXFUNCTION_LINKAGE void mexFunction(int32_T nlhs, mxArray *plhs[],
                                      int32_T nrhs, const mxArray *prhs[]);
 
 emlrtCTX mexFunctionCreateRootTLS(void);
-
-void unsafe_generateShortcutPath_mexFunction(int32_T nlhs, mxArray *plhs[1],
-                                             int32_T nrhs,
-                                             const mxArray *prhs[1]);
 
 #ifdef __cplusplus
 }

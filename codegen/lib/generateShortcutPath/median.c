@@ -5,17 +5,23 @@
  * File: median.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 01-Apr-2021 14:26:53
+ * C/C++ source code generated on  : 01-Apr-2021 15:30:00
  */
 
 /* Include Files */
 #include "median.h"
+#include "eml_int_forloop_overflow_check.h"
 #include "generateShortcutPath_emxutil.h"
 #include "generateShortcutPath_types.h"
 #include "quickselect.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 
+/* Custom Source Code */
+// SPDX-License-Identifier: GPL-3.0-only
+/*
+     Copyright (C) 2022  Haruki Shimotori. All right reserved.
+*/
 /* Function Definitions */
 /*
  * Arguments    : const emxArray_real_T *x
@@ -44,6 +50,9 @@ double median(const emxArray_real_T *x)
       b_x->data[b_vlen] = x->data[b_vlen];
     }
     b_vlen = 0;
+    if (x->size[1] > 2147483646) {
+      check_forloop_overflow_error();
+    }
     for (loop_ub = 0; loop_ub < vlen; loop_ub++) {
       if (!rtIsNaN(b_x->data[loop_ub])) {
         b_vlen++;

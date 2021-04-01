@@ -9,7 +9,6 @@ function flag_table = getFlagTable(src_course, range, margin)
             diffs(1, j) = src_course(1, j) - ref_position(1, 1);
             diffs(2, j) = src_course(2, j) - ref_position(2, 1);
         end
-%         diffs = src_course - ref_position;
         
         distances = sqrt(diffs(1, :).^2 + diffs(2, :).^2); % すべての点とref_positionとの距離を計算
 

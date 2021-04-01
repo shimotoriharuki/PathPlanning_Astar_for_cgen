@@ -5,7 +5,7 @@
  * File: _coder_generateShortcutPath_mex.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 01-Apr-2021 14:26:53
+ * C/C++ source code generated on  : 01-Apr-2021 15:30:00
  */
 
 /* Include Files */
@@ -15,44 +15,13 @@
 /* Function Definitions */
 /*
  * Arguments    : int32_T nlhs
- *                mxArray *plhs[]
- *                int32_T nrhs
- *                const mxArray *prhs[]
- * Return Type  : void
- */
-void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
-                 const mxArray *prhs[])
-{
-  mexAtExit(&generateShortcutPath_atexit);
-  /* Module initialization. */
-  generateShortcutPath_initialize();
-  /* Dispatch the entry-point. */
-  unsafe_generateShortcutPath_mexFunction(nlhs, plhs, nrhs, prhs);
-  /* Module termination. */
-  generateShortcutPath_terminate();
-}
-
-/*
- * Arguments    : void
- * Return Type  : emlrtCTX
- */
-emlrtCTX mexFunctionCreateRootTLS(void)
-{
-  emlrtCreateRootTLSR2021a(&emlrtRootTLSGlobal, &emlrtContextGlobal, NULL, 1,
-                           NULL);
-  return emlrtRootTLSGlobal;
-}
-
-/*
- * Arguments    : int32_T nlhs
  *                mxArray *plhs[1]
  *                int32_T nrhs
  *                const mxArray *prhs[1]
  * Return Type  : void
  */
-void unsafe_generateShortcutPath_mexFunction(int32_T nlhs, mxArray *plhs[1],
-                                             int32_T nrhs,
-                                             const mxArray *prhs[1])
+void generateShortcutPath_mexFunction(int32_T nlhs, mxArray *plhs[1],
+                                      int32_T nrhs, const mxArray *prhs[1])
 {
   emlrtStack st = {
       NULL, /* site */
@@ -74,6 +43,36 @@ void unsafe_generateShortcutPath_mexFunction(int32_T nlhs, mxArray *plhs[1],
   generateShortcutPath_api(prhs[0], &outputs);
   /* Copy over outputs to the caller. */
   emlrtReturnArrays(1, &plhs[0], &outputs);
+}
+
+/*
+ * Arguments    : int32_T nlhs
+ *                mxArray *plhs[]
+ *                int32_T nrhs
+ *                const mxArray *prhs[]
+ * Return Type  : void
+ */
+void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
+                 const mxArray *prhs[])
+{
+  mexAtExit(&generateShortcutPath_atexit);
+  /* Module initialization. */
+  generateShortcutPath_initialize();
+  /* Dispatch the entry-point. */
+  generateShortcutPath_mexFunction(nlhs, plhs, nrhs, prhs);
+  /* Module termination. */
+  generateShortcutPath_terminate();
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : emlrtCTX
+ */
+emlrtCTX mexFunctionCreateRootTLS(void)
+{
+  emlrtCreateRootTLSR2021a(&emlrtRootTLSGlobal, &emlrtContextGlobal, NULL, 1,
+                           NULL);
+  return emlrtRootTLSGlobal;
 }
 
 /*

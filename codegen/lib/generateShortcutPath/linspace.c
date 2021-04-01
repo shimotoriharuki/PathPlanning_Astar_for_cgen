@@ -5,7 +5,7 @@
  * File: linspace.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 01-Apr-2021 14:26:53
+ * C/C++ source code generated on  : 01-Apr-2021 15:30:00
  */
 
 /* Include Files */
@@ -14,6 +14,11 @@
 #include "generateShortcutPath_types.h"
 #include "rt_nonfinite.h"
 
+/* Custom Source Code */
+// SPDX-License-Identifier: GPL-3.0-only
+/*
+     Copyright (C) 2022  Haruki Shimotori. All right reserved.
+*/
 /* Function Definitions */
 /*
  * Arguments    : double d1

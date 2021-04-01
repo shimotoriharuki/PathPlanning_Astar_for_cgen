@@ -5,7 +5,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 01-Apr-2021 14:26:53
+ * C/C++ source code generated on  : 01-Apr-2021 15:30:00
  */
 
 /*************************************************************************/
@@ -40,11 +40,19 @@
 #include "generateShortcutPath_terminate.h"
 #include "generateShortcutPath_types.h"
 #include "rt_nonfinite.h"
+#include <stdio.h>
 
+/* Custom Source Code */
+// SPDX-License-Identifier: GPL-3.0-only
+/*
+     Copyright (C) 2022  Haruki Shimotori. All right reserved.
+*/
 /* Function Declarations */
 static emxArray_real_T *argInit_2xUnbounded_real_T(void);
 
 static double argInit_real_T(void);
+
+static void h_rtErrorWithMessageID(const char *aFcnName, int aLineNum);
 
 static void main_generateShortcutPath(void);
 
@@ -82,6 +90,21 @@ static double argInit_real_T(void)
 }
 
 /*
+ * Arguments    : const char *aFcnName
+ *                int aLineNum
+ * Return Type  : void
+ */
+static void h_rtErrorWithMessageID(const char *aFcnName, int aLineNum)
+{
+  fprintf(stderr, "Example main does not support command line arguments.");
+  fprintf(stderr, "\n");
+  fprintf(stderr, "Error in %s (line %d)", aFcnName, aLineNum);
+  fprintf(stderr, "\n");
+  fflush(stderr);
+  abort();
+}
+
+/*
  * Arguments    : void
  * Return Type  : void
  */
@@ -104,8 +127,17 @@ static void main_generateShortcutPath(void)
  */
 int main(int argc, char **argv)
 {
-  (void)argc;
+  static rtRunTimeErrorInfo e_emlrtRTEI = {
+      1,                      /* lineNo */
+      28,                     /* colNo */
+      "generateShortcutPath", /* fName */
+      "C:\\Users\\under\\MATLAB "
+      "Drive\\PathPlanning_Astar_for_Cgen\\generateShortcutPath.m" /* pName */
+  };
   (void)argv;
+  if (argc > 1) {
+    h_rtErrorWithMessageID(e_emlrtRTEI.fName, e_emlrtRTEI.lineNo);
+  }
   /* The initialize function is being called automatically from your entry-point
    * function. So, a call to initialize is not included here. */
   /* Invoke the entry-point functions.

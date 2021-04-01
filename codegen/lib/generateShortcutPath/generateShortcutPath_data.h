@@ -5,16 +5,20 @@
  * File: generateShortcutPath_data.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 01-Apr-2021 14:26:53
+ * C/C++ source code generated on  : 01-Apr-2021 15:30:00
  */
 
 #ifndef GENERATESHORTCUTPATH_DATA_H
 #define GENERATESHORTCUTPATH_DATA_H
 
 /* Include Files */
+#include "generateShortcutPath_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
+
+/* Variable Declarations */
+extern rtRunTimeErrorInfo d_emlrtRTEI;
 
 #endif
 /*

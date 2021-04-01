@@ -30,7 +30,6 @@ function [return_map, return_open_list] = openAroundNodeDP(map, open_list, ref_x
                 temp_node.score = map(y, x).score;
                 temp_node.g_cost = map(y, x).g_cost;
                 temp_node.h_cost = map(y, x).h_cost;
-%                 open_list = [open_list, temp_node]; %オープンリストに追加
 
                 temp_open_list = zeros(1, length(open_list));
                 for k = 1 : length(open_list)
