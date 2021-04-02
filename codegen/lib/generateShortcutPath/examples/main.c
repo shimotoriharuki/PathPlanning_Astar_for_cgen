@@ -5,7 +5,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 01-Apr-2021 15:30:00
+ * C/C++ source code generated on  : 02-Apr-2021 15:28:24
  */
 
 /*************************************************************************/
@@ -52,7 +52,7 @@ static emxArray_real_T *argInit_2xUnbounded_real_T(void);
 
 static double argInit_real_T(void);
 
-static void h_rtErrorWithMessageID(const char *aFcnName, int aLineNum);
+static void i_rtErrorWithMessageID(const char *aFcnName, int aLineNum);
 
 static void main_generateShortcutPath(void);
 
@@ -94,7 +94,7 @@ static double argInit_real_T(void)
  *                int aLineNum
  * Return Type  : void
  */
-static void h_rtErrorWithMessageID(const char *aFcnName, int aLineNum)
+static void i_rtErrorWithMessageID(const char *aFcnName, int aLineNum)
 {
   fprintf(stderr, "Example main does not support command line arguments.");
   fprintf(stderr, "\n");
@@ -127,7 +127,7 @@ static void main_generateShortcutPath(void)
  */
 int main(int argc, char **argv)
 {
-  static rtRunTimeErrorInfo e_emlrtRTEI = {
+  static rtRunTimeErrorInfo h_emlrtRTEI = {
       1,                      /* lineNo */
       28,                     /* colNo */
       "generateShortcutPath", /* fName */
@@ -136,7 +136,7 @@ int main(int argc, char **argv)
   };
   (void)argv;
   if (argc > 1) {
-    h_rtErrorWithMessageID(e_emlrtRTEI.fName, e_emlrtRTEI.lineNo);
+    i_rtErrorWithMessageID(h_emlrtRTEI.fName, h_emlrtRTEI.lineNo);
   }
   /* The initialize function is being called automatically from your entry-point
    * function. So, a call to initialize is not included here. */

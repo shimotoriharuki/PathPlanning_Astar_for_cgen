@@ -5,7 +5,7 @@
  * File: linspace.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 01-Apr-2021 15:30:00
+ * C/C++ source code generated on  : 02-Apr-2021 15:28:24
  */
 
 /* Include Files */
@@ -20,32 +20,6 @@
      Copyright (C) 2022  Haruki Shimotori. All right reserved.
 */
 /* Function Definitions */
-/*
- * Arguments    : double d1
- *                double d2
- *                double y[9999]
- * Return Type  : void
- */
-void b_linspace(double d1, double d2, double y[9999])
-{
-  double delta1;
-  int k;
-  y[9998] = d2;
-  y[0] = d1;
-  if (d1 == -d2) {
-    delta1 = d2 / 9998.0;
-    for (k = 0; k < 9997; k++) {
-      y[k + 1] = (2.0 * ((double)k + 2.0) - 10000.0) * delta1;
-    }
-    y[4999] = 0.0;
-  } else {
-    delta1 = (d2 - d1) / 9998.0;
-    for (k = 0; k < 9997; k++) {
-      y[k + 1] = d1 + ((double)k + 1.0) * delta1;
-    }
-  }
-}
-
 /*
  * Arguments    : double d1
  *                double d2

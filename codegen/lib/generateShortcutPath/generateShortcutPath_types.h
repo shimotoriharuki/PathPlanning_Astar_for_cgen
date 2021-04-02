@@ -5,7 +5,7 @@
  * File: generateShortcutPath_types.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 01-Apr-2021 15:30:00
+ * C/C++ source code generated on  : 02-Apr-2021 15:28:24
  */
 
 #ifndef GENERATESHORTCUTPATH_TYPES_H
@@ -27,6 +27,16 @@ typedef struct {
 } b_struct_T;
 #endif /* typedef_b_struct_T */
 
+#ifndef typedef_rtRunTimeErrorInfo
+#define typedef_rtRunTimeErrorInfo
+typedef struct {
+  int lineNo;
+  int colNo;
+  const char *fName;
+  const char *pName;
+} rtRunTimeErrorInfo;
+#endif /* typedef_rtRunTimeErrorInfo */
+
 #ifndef typedef_rtBoundsCheckInfo
 #define typedef_rtBoundsCheckInfo
 typedef struct {
@@ -40,16 +50,6 @@ typedef struct {
   int checkKind;
 } rtBoundsCheckInfo;
 #endif /* typedef_rtBoundsCheckInfo */
-
-#ifndef typedef_rtRunTimeErrorInfo
-#define typedef_rtRunTimeErrorInfo
-typedef struct {
-  int lineNo;
-  int colNo;
-  const char *fName;
-  const char *pName;
-} rtRunTimeErrorInfo;
-#endif /* typedef_rtRunTimeErrorInfo */
 
 #ifndef typedef_rtDoubleCheckInfo
 #define typedef_rtDoubleCheckInfo

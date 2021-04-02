@@ -1,4 +1,4 @@
-function shortcut_course = generateShortcutPath(src_course)
+function shortcut_course = generateShortcutPath(src_course, range)
     % ------------------正の整数にするためにマージンをとる---------------- %
     [course, margin] = moveCoordinatesPositively(src_course(1, :), src_course(2, :));
 
@@ -12,14 +12,13 @@ function shortcut_course = generateShortcutPath(src_course)
     remaining_course = course;
     shortcut_course = repmat(-1, 2, 9999);
     
-%     for i = 1 : 3
     while 1
         % コースを交差点で切る
         flag_table = getFlagTable(remaining_course, 10, 10);
         [trimming_course, remaining_course] = courseTrimer(remaining_course, flag_table);
 
         % マップを作成する
-        expantion = round(10); %cm 膨張させる大きさ
+        expantion = round(range); %cm 膨張させる大きさ
         map = createMap(size_x, size_y, trimming_course, expantion); %バイナリマップ
 
         % 最短経路を計算
@@ -39,12 +38,10 @@ function shortcut_course = generateShortcutPath(src_course)
             break;
         end
     end
-    
-
+      
     end_index = find(shortcut_course(1, :) < 0, 1);
-    for j = end_index : length(shortcut_course)
-        shortcut_course(:, j) = shortcut_course(:, end_index - 1); % 使われなかった-1のところを最後のコース情報で埋める
-    end
+    end_indexx = end_index(1, 1);
+    shortcut_course(:, end_indexx : end) = repmat(shortcut_course(:, end_indexx - 1), 1, length(shortcut_course(:, end_indexx : end))); %使ってない要素を最後のコース情報で埋める
     
     ones_matrix = ones(2, length(shortcut_course(1, :)));    
     shortcut_course = shortcut_course - ones_matrix; %行列のインデックスにするために1を足していたのを引く

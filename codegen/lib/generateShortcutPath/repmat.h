@@ -5,7 +5,7 @@
  * File: repmat.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 01-Apr-2021 15:30:00
+ * C/C++ source code generated on  : 02-Apr-2021 15:28:24
  */
 
 #ifndef REPMAT_H
@@ -22,6 +22,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
+void b_repmat(const double a[2], double varargin_2, emxArray_real_T *b);
+
 void repmat(double varargin_1, double varargin_2, emxArray_struct_T *b);
 
 #ifdef __cplusplus

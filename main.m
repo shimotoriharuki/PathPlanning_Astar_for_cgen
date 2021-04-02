@@ -26,7 +26,14 @@ clear
 % course_x = round(sin(1 * num) * 10); %cm
 % course_y = round(sin(4 * num) * 8); %cm
 
-fileName = 'course_data/2019East.txt';
+% fileName = 'course_data/2019AllJapan.txt';
+% fileName = 'course_data/2019East.txt';
+% fileName = 'course_data/2018student_points.txt';
+% fileName = 'course_data/2018alljapan_points.txt';
+% fileName = 'course_data/2017alljapan_points.txt';
+% fileName = 'course_data/2016alljapan_points.txt';
+fileName = 'course_data/2015alljapan_points.txt';
+
 positions = readmatrix(fileName); %[m}
 positions = positions .* 100; %cm
 course_x = round(positions(:, 1)');
@@ -34,8 +41,8 @@ course_y = round(positions(:, 2)');
 
 % 最短経路を計算
 course = [course_x; course_y];
-shortcut_course = generateShortcutPath(course);
-% shortcut_course = generateShortcutPath_mex(course);
+shortcut_course = generateShortcutPath(course, 5);
+% shortcut_course = generateShortcutPath_mex(course, 5);
 
 figure(1)
 scatter(course_x, course_y)

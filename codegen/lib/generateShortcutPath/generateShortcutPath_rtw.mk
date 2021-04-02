@@ -2,7 +2,7 @@
 ## Makefile generated for component 'generateShortcutPath'. 
 ## 
 ## Makefile     : generateShortcutPath_rtw.mk
-## Generated on : Thu Apr 01 15:30:13 2021
+## Generated on : Fri Apr 02 15:28:35 2021
 ## Final product: ./generateShortcutPath.lib
 ## Product type : static-library
 ## 
@@ -222,7 +222,7 @@ DEFINES = $(DEFINES_) $(DEFINES_CUSTOM) $(DEFINES_SKIPFORSIL) $(DEFINES_STANDARD
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)/generateShortcutPath_data.c $(START_DIR)/rt_nonfinite.c $(START_DIR)/rtGetNaN.c $(START_DIR)/rtGetInf.c $(START_DIR)/generateShortcutPath_initialize.c $(START_DIR)/generateShortcutPath_terminate.c $(START_DIR)/generateShortcutPath.c $(START_DIR)/minOrMax.c $(START_DIR)/eml_int_forloop_overflow_check.c $(START_DIR)/linspace.c $(START_DIR)/power.c $(START_DIR)/find.c $(START_DIR)/median.c $(START_DIR)/quickselect.c $(START_DIR)/applyToMultipleDims.c $(START_DIR)/repmat.c $(START_DIR)/checkNonEmptyMemberValueList.c $(START_DIR)/movmean.c $(START_DIR)/sqrt.c $(START_DIR)/openAroundNodeDP.c $(START_DIR)/flip.c $(START_DIR)/generateShortcutPath_emxutil.c $(START_DIR)/generateShortcutPath_emxAPI.c $(START_DIR)/generateShortcutPath_rtwutil.c
+SRCS = $(START_DIR)/generateShortcutPath_data.c $(START_DIR)/rt_nonfinite.c $(START_DIR)/rtGetNaN.c $(START_DIR)/rtGetInf.c $(START_DIR)/generateShortcutPath_initialize.c $(START_DIR)/generateShortcutPath_terminate.c $(START_DIR)/generateShortcutPath.c $(START_DIR)/minOrMax.c $(START_DIR)/eml_int_forloop_overflow_check.c $(START_DIR)/linspace.c $(START_DIR)/power.c $(START_DIR)/find.c $(START_DIR)/median.c $(START_DIR)/quickselect.c $(START_DIR)/applyToMultipleDims.c $(START_DIR)/repmat.c $(START_DIR)/computeAstar.c $(START_DIR)/movmean.c $(START_DIR)/openAroundNodeDP.c $(START_DIR)/flip.c $(START_DIR)/generateShortcutPath_emxutil.c $(START_DIR)/generateShortcutPath_emxAPI.c $(START_DIR)/generateShortcutPath_rtwutil.c
 
 ALL_SRCS = $(SRCS)
 
@@ -230,7 +230,7 @@ ALL_SRCS = $(SRCS)
 ## OBJECTS
 ###########################################################################
 
-OBJS = generateShortcutPath_data.o rt_nonfinite.o rtGetNaN.o rtGetInf.o generateShortcutPath_initialize.o generateShortcutPath_terminate.o generateShortcutPath.o minOrMax.o eml_int_forloop_overflow_check.o linspace.o power.o find.o median.o quickselect.o applyToMultipleDims.o repmat.o checkNonEmptyMemberValueList.o movmean.o sqrt.o openAroundNodeDP.o flip.o generateShortcutPath_emxutil.o generateShortcutPath_emxAPI.o generateShortcutPath_rtwutil.o
+OBJS = generateShortcutPath_data.o rt_nonfinite.o rtGetNaN.o rtGetInf.o generateShortcutPath_initialize.o generateShortcutPath_terminate.o generateShortcutPath.o minOrMax.o eml_int_forloop_overflow_check.o linspace.o power.o find.o median.o quickselect.o applyToMultipleDims.o repmat.o computeAstar.o movmean.o openAroundNodeDP.o flip.o generateShortcutPath_emxutil.o generateShortcutPath_emxAPI.o generateShortcutPath_rtwutil.o
 
 ALL_OBJS = $(OBJS)
 
@@ -566,15 +566,11 @@ repmat.o : $(START_DIR)/repmat.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-checkNonEmptyMemberValueList.o : $(START_DIR)/checkNonEmptyMemberValueList.c
+computeAstar.o : $(START_DIR)/computeAstar.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
 movmean.o : $(START_DIR)/movmean.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-sqrt.o : $(START_DIR)/sqrt.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 

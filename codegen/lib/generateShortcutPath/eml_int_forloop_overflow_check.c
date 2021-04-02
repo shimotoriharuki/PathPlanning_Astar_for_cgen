@@ -5,7 +5,7 @@
  * File: eml_int_forloop_overflow_check.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 01-Apr-2021 15:30:00
+ * C/C++ source code generated on  : 02-Apr-2021 15:28:24
  */
 
 /* Include Files */
@@ -20,7 +20,7 @@
      Copyright (C) 2022  Haruki Shimotori. All right reserved.
 */
 /* Function Declarations */
-static void c_rtErrorWithMessageID(const int b, const char *c,
+static void d_rtErrorWithMessageID(const int b, const char *c,
                                    const char *aFcnName, int aLineNum);
 
 /* Function Definitions */
@@ -31,7 +31,7 @@ static void c_rtErrorWithMessageID(const int b, const char *c,
  *                int aLineNum
  * Return Type  : void
  */
-static void c_rtErrorWithMessageID(const int b, const char *c,
+static void d_rtErrorWithMessageID(const int b, const char *c,
                                    const char *aFcnName, int aLineNum)
 {
   fprintf(stderr,
@@ -51,7 +51,7 @@ static void c_rtErrorWithMessageID(const int b, const char *c,
  */
 void check_forloop_overflow_error(void)
 {
-  static rtRunTimeErrorInfo e_emlrtRTEI = {
+  static rtRunTimeErrorInfo h_emlrtRTEI = {
       88,                             /* lineNo */
       9,                              /* colNo */
       "check_forloop_overflow_error", /* fName */
@@ -59,7 +59,7 @@ void check_forloop_overflow_error(void)
       "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\eml\\eml_int_forloop_"
       "overflow_check.m" /* pName */
   };
-  c_rtErrorWithMessageID(5, "int32", e_emlrtRTEI.fName, e_emlrtRTEI.lineNo);
+  d_rtErrorWithMessageID(5, "int32", h_emlrtRTEI.fName, h_emlrtRTEI.lineNo);
 }
 
 /*

@@ -5,7 +5,7 @@
  * File: generateShortcutPath_rtwutil.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 01-Apr-2021 15:30:00
+ * C/C++ source code generated on  : 02-Apr-2021 15:28:24
  */
 
 /* Include Files */
@@ -21,19 +21,14 @@
 */
 /* Function Definitions */
 /*
- * Arguments    : const int b
- *                const char *c
- *                const char *aFcnName
+ * Arguments    : const char *aFcnName
  *                int aLineNum
  * Return Type  : void
  */
-void i_rtErrorWithMessageID(const int b, const char *c, const char *aFcnName,
-                            int aLineNum)
+void b_rtErrorWithMessageID(const char *aFcnName, int aLineNum)
 {
   fprintf(stderr,
-          "Domain error. To compute complex results from real x, use "
-          "\'%.*s(complex(x))\'.",
-          b, c);
+          "Dimensions of arrays being concatenated are not consistent.");
   fprintf(stderr, "\n");
   fprintf(stderr, "Error in %s (line %d)", aFcnName, aLineNum);
   fprintf(stderr, "\n");
@@ -75,6 +70,27 @@ void rtDynamicBoundsError(int aIndexValue, int aLoBound, int aHiBound,
     fflush(stderr);
     abort();
   }
+}
+
+/*
+ * Arguments    : const int b
+ *                const char *c
+ *                const char *aFcnName
+ *                int aLineNum
+ * Return Type  : void
+ */
+void rtErrorWithMessageID(const int b, const char *c, const char *aFcnName,
+                          int aLineNum)
+{
+  fprintf(stderr,
+          "Domain error. To compute complex results from real x, use "
+          "\'%.*s(complex(x))\'.",
+          b, c);
+  fprintf(stderr, "\n");
+  fprintf(stderr, "Error in %s (line %d)", aFcnName, aLineNum);
+  fprintf(stderr, "\n");
+  fflush(stderr);
+  abort();
 }
 
 /*

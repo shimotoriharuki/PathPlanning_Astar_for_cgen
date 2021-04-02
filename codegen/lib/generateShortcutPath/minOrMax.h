@@ -5,7 +5,7 @@
  * File: minOrMax.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 01-Apr-2021 15:30:00
+ * C/C++ source code generated on  : 02-Apr-2021 15:28:24
  */
 
 #ifndef MINORMAX_H
@@ -22,8 +22,6 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-double b_minimum(const double x[999]);
-
 double maximum(const emxArray_real_T *x);
 
 double minimum(const emxArray_real_T *x);

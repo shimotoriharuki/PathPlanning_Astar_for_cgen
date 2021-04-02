@@ -5,7 +5,7 @@
  * File: find.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 01-Apr-2021 15:30:00
+ * C/C++ source code generated on  : 02-Apr-2021 15:28:24
  */
 
 /* Include Files */
@@ -22,7 +22,7 @@
      Copyright (C) 2022  Haruki Shimotori. All right reserved.
 */
 /* Function Declarations */
-static void d_rtErrorWithMessageID(const char *aFcnName, int aLineNum);
+static void e_rtErrorWithMessageID(const char *aFcnName, int aLineNum);
 
 /* Function Definitions */
 /*
@@ -30,7 +30,7 @@ static void d_rtErrorWithMessageID(const char *aFcnName, int aLineNum);
  *                int aLineNum
  * Return Type  : void
  */
-static void d_rtErrorWithMessageID(const char *aFcnName, int aLineNum)
+static void e_rtErrorWithMessageID(const char *aFcnName, int aLineNum)
 {
   fprintf(stderr, "Assertion failed.");
   fprintf(stderr, "\n");
@@ -41,47 +41,12 @@ static void d_rtErrorWithMessageID(const char *aFcnName, int aLineNum)
 }
 
 /*
- * Arguments    : const bool x[999]
- *                int i_data[]
- *                int i_size[2]
- * Return Type  : void
- */
-void b_eml_find(const bool x[999], int i_data[], int i_size[2])
-{
-  int idx;
-  int ii;
-  bool exitg1;
-  idx = 0;
-  i_size[0] = 1;
-  ii = 0;
-  exitg1 = false;
-  while ((!exitg1) && (ii < 999)) {
-    if (x[ii]) {
-      idx++;
-      i_data[idx - 1] = ii + 1;
-      if (idx >= 999) {
-        exitg1 = true;
-      } else {
-        ii++;
-      }
-    } else {
-      ii++;
-    }
-  }
-  if (1 > idx) {
-    i_size[1] = 0;
-  } else {
-    i_size[1] = idx;
-  }
-}
-
-/*
  * Arguments    : const bool x[9999]
  *                int i_data[]
  *                int i_size[2]
  * Return Type  : void
  */
-void c_eml_find(const bool x[9999], int i_data[], int i_size[2])
+void b_eml_find(const bool x[9999], int i_data[], int i_size[2])
 {
   int idx;
   int ii;
@@ -113,7 +78,7 @@ void c_eml_find(const bool x[9999], int i_data[], int i_size[2])
  */
 void eml_find(const emxArray_boolean_T *x, emxArray_int32_T *i)
 {
-  static rtRunTimeErrorInfo e_emlrtRTEI = {
+  static rtRunTimeErrorInfo h_emlrtRTEI = {
       392,                  /* lineNo */
       1,                    /* colNo */
       "find_first_indices", /* fName */
@@ -150,7 +115,7 @@ void eml_find(const emxArray_boolean_T *x, emxArray_int32_T *i)
     }
   }
   if (idx > x->size[1]) {
-    d_rtErrorWithMessageID(e_emlrtRTEI.fName, e_emlrtRTEI.lineNo);
+    e_rtErrorWithMessageID(h_emlrtRTEI.fName, h_emlrtRTEI.lineNo);
   }
   if (x->size[1] == 1) {
     if (idx == 0) {
