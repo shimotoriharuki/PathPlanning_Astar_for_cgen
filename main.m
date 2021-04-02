@@ -26,7 +26,7 @@ clear
 % course_x = round(sin(1 * num) * 10); %cm
 % course_y = round(sin(4 * num) * 8); %cm
 
-fileName = 'course_data/2019Student.txt';
+fileName = 'course_data/2019East.txt';
 positions = readmatrix(fileName); %[m}
 positions = positions .* 100; %cm
 course_x = round(positions(:, 1)');
@@ -52,6 +52,7 @@ xlabel('x')
 ylabel('y')
 axis equal
 
+% plot_course = find()
 scatter(shortcut_course(1, :), shortcut_course(2, :), 'o')
 title('ショートカット')
 xlabel('x')

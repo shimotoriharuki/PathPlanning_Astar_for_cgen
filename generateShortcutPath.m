@@ -11,8 +11,8 @@ function shortcut_course = generateShortcutPath(src_course)
 
     remaining_course = course;
     shortcut_course = repmat(-1, 2, 9999);
-    disp(size(shortcut_course(1, :)))
     
+%     for i = 1 : 3
     while 1
         % コースを交差点で切る
         flag_table = getFlagTable(remaining_course, 10, 10);
@@ -40,10 +40,17 @@ function shortcut_course = generateShortcutPath(src_course)
         end
     end
     
-    ones_matrix = ones(2, length(shortcut_course(1, :)));
-    shortcut_course = shortcut_course - ones_matrix; %行列のインデックスにするために1を足していたのを引く
-    shortcut_course = removeMargin(shortcut_course, margin); % 正にマージンしていた分を取り除く
+
+    end_index = find(shortcut_course(1, :) < 0, 1);
+    for j = end_index : length(shortcut_course)
+        shortcut_course(:, j) = shortcut_course(:, end_index - 1); % 使われなかった-1のところを最後のコース情報で埋める
+    end
     
+    ones_matrix = ones(2, length(shortcut_course(1, :)));    
+    shortcut_course = shortcut_course - ones_matrix; %行列のインデックスにするために1を足していたのを引く
+    
+    shortcut_course = removeMargin(shortcut_course, margin); % 正にマージンしていた分を取り除く
+     
     shortcut_course = getMovingAverage(shortcut_course, 30); % 平滑化のため移動平均を計算
     
 end
