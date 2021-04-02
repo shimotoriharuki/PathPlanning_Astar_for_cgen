@@ -5,7 +5,7 @@
  * File: movmean.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 02-Apr-2021 15:28:24
+ * C/C++ source code generated on  : 02-Apr-2021 16:12:11
  */
 
 /* Include Files */

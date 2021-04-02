@@ -5,7 +5,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 02-Apr-2021 15:28:24
+ * C/C++ source code generated on  : 02-Apr-2021 16:12:11
  */
 
 /*************************************************************************/
@@ -116,7 +116,7 @@ static void main_generateShortcutPath(void)
   /* Initialize function input argument 'src_course'. */
   src_course = argInit_2xUnbounded_real_T();
   /* Call the entry-point 'generateShortcutPath'. */
-  generateShortcutPath(src_course, shortcut_course);
+  generateShortcutPath(src_course, argInit_real_T(), shortcut_course);
   emxDestroyArray_real_T(src_course);
 }
 

@@ -5,7 +5,7 @@
  * File: _coder_generateShortcutPath_api.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 02-Apr-2021 15:28:24
+ * C/C++ source code generated on  : 02-Apr-2021 16:12:11
  */
 
 /* Include Files */
@@ -32,7 +32,13 @@ static void b_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
                                const emlrtMsgIdentifier *parentId,
                                emxArray_real_T *y);
 
-static void c_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
+static real_T c_emlrt_marshallIn(const emlrtStack *sp, const mxArray *range,
+                                 const char_T *identifier);
+
+static real_T d_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
+                                 const emlrtMsgIdentifier *parentId);
+
+static void e_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
                                const emlrtMsgIdentifier *msgId,
                                emxArray_real_T *ret);
 
@@ -49,6 +55,9 @@ static void emxFree_real_T(emxArray_real_T **pEmxArray);
 static void emxInit_real_T(const emlrtStack *sp, emxArray_real_T **pEmxArray,
                            int32_T numDimensions, boolean_T doPush);
 
+static real_T f_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
+                                 const emlrtMsgIdentifier *msgId);
+
 /* Function Definitions */
 /*
  * Arguments    : const emlrtStack *sp
@@ -61,8 +70,42 @@ static void b_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
                                const emlrtMsgIdentifier *parentId,
                                emxArray_real_T *y)
 {
-  c_emlrt_marshallIn(sp, emlrtAlias(u), parentId, y);
+  e_emlrt_marshallIn(sp, emlrtAlias(u), parentId, y);
   emlrtDestroyArray(&u);
+}
+
+/*
+ * Arguments    : const emlrtStack *sp
+ *                const mxArray *range
+ *                const char_T *identifier
+ * Return Type  : real_T
+ */
+static real_T c_emlrt_marshallIn(const emlrtStack *sp, const mxArray *range,
+                                 const char_T *identifier)
+{
+  emlrtMsgIdentifier thisId;
+  real_T y;
+  thisId.fIdentifier = (const char_T *)identifier;
+  thisId.fParent = NULL;
+  thisId.bParentIsCell = false;
+  y = d_emlrt_marshallIn(sp, emlrtAlias(range), &thisId);
+  emlrtDestroyArray(&range);
+  return y;
+}
+
+/*
+ * Arguments    : const emlrtStack *sp
+ *                const mxArray *u
+ *                const emlrtMsgIdentifier *parentId
+ * Return Type  : real_T
+ */
+static real_T d_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
+                                 const emlrtMsgIdentifier *parentId)
+{
+  real_T y;
+  y = f_emlrt_marshallIn(sp, emlrtAlias(u), parentId);
+  emlrtDestroyArray(&u);
+  return y;
 }
 
 /*
@@ -72,7 +115,7 @@ static void b_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
  *                emxArray_real_T *ret
  * Return Type  : void
  */
-static void c_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
+static void e_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
                                const emlrtMsgIdentifier *msgId,
                                emxArray_real_T *ret)
 {
@@ -217,11 +260,30 @@ static void emxInit_real_T(const emlrtStack *sp, emxArray_real_T **pEmxArray,
 }
 
 /*
- * Arguments    : const mxArray *prhs
+ * Arguments    : const emlrtStack *sp
+ *                const mxArray *src
+ *                const emlrtMsgIdentifier *msgId
+ * Return Type  : real_T
+ */
+static real_T f_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
+                                 const emlrtMsgIdentifier *msgId)
+{
+  static const int32_T dims = 0;
+  real_T ret;
+  emlrtCheckBuiltInR2012b((emlrtCTX)sp, msgId, src, (const char_T *)"double",
+                          false, 0U, (void *)&dims);
+  ret = *(real_T *)emlrtMxGetData(src);
+  emlrtDestroyArray(&src);
+  return ret;
+}
+
+/*
+ * Arguments    : const mxArray * const prhs[2]
  *                const mxArray **plhs
  * Return Type  : void
  */
-void generateShortcutPath_api(const mxArray *prhs, const mxArray **plhs)
+void generateShortcutPath_api(const mxArray *const prhs[2],
+                              const mxArray **plhs)
 {
   emlrtStack st = {
       NULL, /* site */
@@ -230,15 +292,17 @@ void generateShortcutPath_api(const mxArray *prhs, const mxArray **plhs)
   };
   emxArray_real_T *src_course;
   real_T(*shortcut_course)[19998];
+  real_T range;
   st.tls = emlrtRootTLSGlobal;
   shortcut_course = (real_T(*)[19998])mxMalloc(sizeof(real_T[19998]));
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
   emxInit_real_T(&st, &src_course, 2, true);
   /* Marshall function inputs */
   src_course->canFreeData = false;
-  emlrt_marshallIn(&st, emlrtAlias(prhs), "src_course", src_course);
+  emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "src_course", src_course);
+  range = c_emlrt_marshallIn(&st, emlrtAliasP(prhs[1]), "range");
   /* Invoke the target function */
-  generateShortcutPath(src_course, *shortcut_course);
+  generateShortcutPath(src_course, range, *shortcut_course);
   /* Marshall function outputs */
   *plhs = emlrt_marshallOut(*shortcut_course);
   emxFree_real_T(&src_course);

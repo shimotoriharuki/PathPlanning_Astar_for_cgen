@@ -5,7 +5,7 @@
  * File: generateShortcutPath.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 02-Apr-2021 15:28:24
+ * C/C++ source code generated on  : 02-Apr-2021 16:12:11
  */
 
 #ifndef GENERATESHORTCUTPATH_H
@@ -23,7 +23,7 @@ extern "C" {
 
 /* Function Declarations */
 extern void generateShortcutPath(const emxArray_real_T *src_course,
-                                 double shortcut_course[19998]);
+                                 double range, double shortcut_course[19998]);
 
 #ifdef __cplusplus
 }

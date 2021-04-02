@@ -5,13 +5,14 @@
  * File: generateShortcutPath_rtwutil.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 02-Apr-2021 15:28:24
+ * C/C++ source code generated on  : 02-Apr-2021 16:12:11
  */
 
 /* Include Files */
 #include "generateShortcutPath_rtwutil.h"
 #include "generateShortcutPath_types.h"
 #include "rt_nonfinite.h"
+#include <math.h>
 #include <stdio.h>
 
 /* Custom Source Code */
@@ -21,14 +22,19 @@
 */
 /* Function Definitions */
 /*
- * Arguments    : const char *aFcnName
+ * Arguments    : const int b
+ *                const char *c
+ *                const char *aFcnName
  *                int aLineNum
  * Return Type  : void
  */
-void b_rtErrorWithMessageID(const char *aFcnName, int aLineNum)
+void b_rtErrorWithMessageID(const int b, const char *c, const char *aFcnName,
+                            int aLineNum)
 {
   fprintf(stderr,
-          "Dimensions of arrays being concatenated are not consistent.");
+          "Domain error. To compute complex results from real x, use "
+          "\'%.*s(complex(x))\'.",
+          b, c);
   fprintf(stderr, "\n");
   fprintf(stderr, "Error in %s (line %d)", aFcnName, aLineNum);
   fprintf(stderr, "\n");
@@ -73,19 +79,14 @@ void rtDynamicBoundsError(int aIndexValue, int aLoBound, int aHiBound,
 }
 
 /*
- * Arguments    : const int b
- *                const char *c
- *                const char *aFcnName
+ * Arguments    : const char *aFcnName
  *                int aLineNum
  * Return Type  : void
  */
-void rtErrorWithMessageID(const int b, const char *c, const char *aFcnName,
-                          int aLineNum)
+void rtErrorWithMessageID(const char *aFcnName, int aLineNum)
 {
   fprintf(stderr,
-          "Domain error. To compute complex results from real x, use "
-          "\'%.*s(complex(x))\'.",
-          b, c);
+          "Dimensions of arrays being concatenated are not consistent.");
   fprintf(stderr, "\n");
   fprintf(stderr, "Error in %s (line %d)", aFcnName, aLineNum);
   fprintf(stderr, "\n");
@@ -128,6 +129,27 @@ void rtReportErrorLocation(const char *aFcnName, int aLineNo)
 {
   fprintf(stderr, "Error in %s (line %d)", aFcnName, aLineNo);
   fprintf(stderr, "\n");
+}
+
+/*
+ * Arguments    : double u
+ * Return Type  : double
+ */
+double rt_roundd_snf(double u)
+{
+  double y;
+  if (fabs(u) < 4.503599627370496E+15) {
+    if (u >= 0.5) {
+      y = floor(u + 0.5);
+    } else if (u > -0.5) {
+      y = u * 0.0;
+    } else {
+      y = ceil(u - 0.5);
+    }
+  } else {
+    y = u;
+  }
+  return y;
 }
 
 /*

@@ -5,7 +5,7 @@
  * File: generateShortcutPath.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 02-Apr-2021 15:28:24
+ * C/C++ source code generated on  : 02-Apr-2021 16:12:11
  */
 
 /* Include Files */
@@ -170,10 +170,11 @@ static void rtSubAssignSizeCheck(const int *aDims1, const int aNDims1,
  * ------------------正の整数にするためにマージンをとる---------------- %
  *
  * Arguments    : const emxArray_real_T *src_course
+ *                double range
  *                double shortcut_course[19998]
  * Return Type  : void
  */
-void generateShortcutPath(const emxArray_real_T *src_course,
+void generateShortcutPath(const emxArray_real_T *src_course, double range,
                           double shortcut_course[19998])
 {
   static rtBoundsCheckInfo ab_emlrtBCI = {
@@ -689,7 +690,7 @@ void generateShortcutPath(const emxArray_real_T *src_course,
                                                                          */
   };
   static double c_shortcut_course[9999];
-  static double y[9999];
+  static double d_shortcut_course[9999];
   emxArray_boolean_T *b_margin_y;
   emxArray_int32_T *ii;
   emxArray_int8_T *flag_table;
@@ -701,13 +702,15 @@ void generateShortcutPath(const emxArray_real_T *src_course,
   emxArray_real_T *remaining_course;
   emxArray_real_T *store_course;
   emxArray_struct_T *empty_map;
-  double b_diffs[2];
   double ref_position[2];
+  double trimming_course[2];
   double amad;
   double d;
-  double delta1;
+  double expantion;
   double goal_x;
   double goal_y;
+  double half_expantion;
+  double lb;
   double min_x;
   double min_y;
   double size_x;
@@ -769,8 +772,8 @@ void generateShortcutPath(const emxArray_real_T *src_course,
   }
   min_y = minimum(b_src_course);
   if (min_x < 0.0) {
-    amad = fabs(min_x);
-    linspace(amad, amad, src_course->size[1], margin_x);
+    x = fabs(min_x);
+    linspace(x, x, src_course->size[1], margin_x);
     loop_ub = src_course->size[1];
     i = b_src_course->size[0] * b_src_course->size[1];
     b_src_course->size[0] = 1;
@@ -794,8 +797,8 @@ void generateShortcutPath(const emxArray_real_T *src_course,
     }
   }
   if (min_y < 0.0) {
-    x = fabs(min_y);
-    linspace(x, x, src_course->size[1], margin_y);
+    amad = fabs(min_y);
+    linspace(amad, amad, src_course->size[1], margin_y);
     loop_ub = src_course->size[1];
     i = b_src_course->size[0] * b_src_course->size[1];
     b_src_course->size[0] = 1;
@@ -819,7 +822,7 @@ void generateShortcutPath(const emxArray_real_T *src_course,
     }
   }
   if (margin_y->size[1] != margin_x->size[1]) {
-    b_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
+    rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
   }
   emxInit_real_T(&remaining_course, 2);
   i = remaining_course->size[0] * remaining_course->size[1];
@@ -854,7 +857,7 @@ void generateShortcutPath(const emxArray_real_T *src_course,
   for (i = 0; i < loop_ub; i++) {
     b_src_course->data[i] = remaining_course->data[2 * i];
   }
-  delta1 = maximum(b_src_course);
+  x = maximum(b_src_course);
   loop_ub = remaining_course->size[1];
   i = b_src_course->size[0] * b_src_course->size[1];
   b_src_course->size[0] = 1;
@@ -864,7 +867,7 @@ void generateShortcutPath(const emxArray_real_T *src_course,
     b_src_course->data[i] = remaining_course->data[2 * i];
   }
   amad = minimum(b_src_course);
-  size_x = (delta1 - amad) + 1.0;
+  size_x = (x - amad) + 1.0;
   /*  xのベクトルの最大値-最小値でマップのx方向サイズを計算  */
   loop_ub = remaining_course->size[1];
   i = b_src_course->size[0] * b_src_course->size[1];
@@ -874,7 +877,7 @@ void generateShortcutPath(const emxArray_real_T *src_course,
   for (i = 0; i < loop_ub; i++) {
     b_src_course->data[i] = remaining_course->data[2 * i + 1];
   }
-  delta1 = maximum(b_src_course);
+  x = maximum(b_src_course);
   loop_ub = remaining_course->size[1];
   i = b_src_course->size[0] * b_src_course->size[1];
   b_src_course->size[0] = 1;
@@ -884,12 +887,14 @@ void generateShortcutPath(const emxArray_real_T *src_course,
     b_src_course->data[i] = remaining_course->data[2 * i + 1];
   }
   amad = minimum(b_src_course);
-  size_y = (delta1 - amad) + 1.0;
+  size_y = (x - amad) + 1.0;
   /*  yのベクトルの最大値-最小値でマップのy方向サイズを計算 */
   for (i = 0; i < 19998; i++) {
     shortcut_course[i] = -1.0;
   }
   emxInit_int8_T(&flag_table, 2);
+  expantion = rt_roundd_snf(range);
+  half_expantion = rt_roundd_snf(expantion / 2.0);
   emxInit_real_T(&store_course, 2);
   emxInit_real_T(&diffs, 2);
   emxInit_int32_T(&ii, 2);
@@ -1003,7 +1008,8 @@ void generateShortcutPath(const emxArray_real_T *src_course,
           }
         }
         if (p) {
-          rtErrorWithMessageID(4, "sqrt", emlrtRTEI.fName, emlrtRTEI.lineNo);
+          b_rtErrorWithMessageID(4, "sqrt", b_emlrtRTEI.fName,
+                                 b_emlrtRTEI.lineNo);
         }
         nx = margin_y->size[1];
         if ((1 <= margin_y->size[1]) && (margin_y->size[1] > 2147483646)) {
@@ -1022,7 +1028,6 @@ void generateShortcutPath(const emxArray_real_T *src_course,
           b_margin_y->data[i] = (margin_y->data[i] <= 10.0);
         }
         eml_find(b_margin_y, ii);
-        /*  距離がrange以下だったインデックスを取得 */
         i = margin_x->size[0] * margin_x->size[1];
         margin_x->size[0] = 1;
         margin_x->size[1] = ii->size[1];
@@ -1031,14 +1036,15 @@ void generateShortcutPath(const emxArray_real_T *src_course,
         for (i = 0; i < loop_ub; i++) {
           margin_x->data[i] = ii->data[i];
         }
-        delta1 = median(margin_x);
+        /*  距離がrange以下だったインデックスを取得 */
+        x = median(margin_x);
         i = margin_y->size[0] * margin_y->size[1];
         margin_y->size[0] = 1;
         margin_y->size[1] = margin_x->size[1];
         emxEnsureCapacity_real_T(margin_y, i);
         loop_ub = margin_x->size[1];
         for (i = 0; i < loop_ub; i++) {
-          margin_y->data[i] = margin_x->data[i] - delta1;
+          margin_y->data[i] = margin_x->data[i] - x;
         }
         nx = margin_y->size[1];
         i = b_src_course->size[0] * b_src_course->size[1];
@@ -1052,8 +1058,8 @@ void generateShortcutPath(const emxArray_real_T *src_course,
           b_src_course->data[loop_ub] = fabs(margin_y->data[loop_ub]);
         }
         amad = 1.4826022185056018 * median(b_src_course);
-        x = delta1 - 3.0 * amad;
-        delta1 += 3.0 * amad;
+        lb = x - 3.0 * amad;
+        x += 3.0 * amad;
         /*  外れ値検知　外れ値があったら外れ値の位置に1がたつ */
         /*  すべて足す */
         /*  1以上（1つでも外れ値があったら）だったら交差している */
@@ -1064,7 +1070,7 @@ void generateShortcutPath(const emxArray_real_T *src_course,
         loop_ub = margin_x->size[1];
         for (i = 0; i < loop_ub; i++) {
           d = margin_x->data[i];
-          b_margin_y->data[i] = ((d < x) || (d > delta1));
+          b_margin_y->data[i] = ((d < lb) || (d > x));
         }
         if (applyToMultipleDims(b_margin_y) >= 1.0) {
           /*  交差点だったら */
@@ -1221,7 +1227,7 @@ void generateShortcutPath(const emxArray_real_T *src_course,
           loop_ub = i - b_i;
           nx -= i1;
           if (nx + 1 != loop_ub) {
-            b_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
+            rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
           }
           i = b_remaining_course->size[0] * b_remaining_course->size[1];
           b_remaining_course->size[0] = 2;
@@ -1254,19 +1260,19 @@ void generateShortcutPath(const emxArray_real_T *src_course,
       /*  行、列　＝　y, x */
       i = diffs->size[1] - 1;
       for (b_i = 0; b_i <= i; b_i++) {
-        i1 = diffs->size[1];
-        d = diffs->data[2 * b_i];
-        delta1 = diffs->data[2 * b_i + 1];
-        for (nx = 0; nx < 10; nx++) {
-          for (index_data = 0; index_data < 10; index_data++) {
-            if (b_i + 1 > i1) {
-              rtDynamicBoundsError(b_i + 1, 1, i1, &gb_emlrtBCI);
+        i1 = (int)expantion;
+        for (nx = 0; nx < i1; nx++) {
+          for (index_data = 0; index_data < i1; index_data++) {
+            if (b_i + 1 > diffs->size[1]) {
+              rtDynamicBoundsError(b_i + 1, 1, diffs->size[1], &gb_emlrtBCI);
             }
-            x = ((d + 1.0) - 5.0) + ((double)nx + 1.0);
-            if (b_i + 1 > i1) {
-              rtDynamicBoundsError(b_i + 1, 1, i1, &hb_emlrtBCI);
+            x = ((diffs->data[2 * b_i] + 1.0) - half_expantion) +
+                ((double)nx + 1.0);
+            if (b_i + 1 > diffs->size[1]) {
+              rtDynamicBoundsError(b_i + 1, 1, diffs->size[1], &hb_emlrtBCI);
             }
-            amad = ((delta1 + 1.0) - 5.0) + ((double)index_data + 1.0);
+            amad = ((diffs->data[2 * b_i + 1] + 1.0) - half_expantion) +
+                   ((double)index_data + 1.0);
             if (x < 1.0) {
               x = 1.0;
             } else if (x > size_x) {
@@ -1305,9 +1311,9 @@ void generateShortcutPath(const emxArray_real_T *src_course,
       }
       ref_position[0] = diffs->data[0] + 1.0;
       ref_position[1] = diffs->data[1] + 1.0;
-      b_diffs[0] = diffs->data[2 * (diffs->size[1] - 1)] + 1.0;
-      b_diffs[1] = diffs->data[2 * (diffs->size[1] - 1) + 1] + 1.0;
-      computeAstar(empty_map, ref_position, b_diffs, size_x, size_y,
+      trimming_course[0] = diffs->data[2 * (diffs->size[1] - 1)] + 1.0;
+      trimming_course[1] = diffs->data[2 * (diffs->size[1] - 1) + 1] + 1.0;
+      computeAstar(empty_map, ref_position, trimming_course, size_x, size_y,
                    store_course);
       /*  切り取られたコースを連結する */
       for (i = 0; i < 9999; i++) {
@@ -1398,59 +1404,33 @@ void generateShortcutPath(const emxArray_real_T *src_course,
     shortcut_course[i]--;
   }
   /* 行列のインデックスにするために1を足していたのを引く */
-  amad = fabs(min_x);
-  x = fabs(min_y);
-  y[9998] = amad;
-  y[0] = amad;
-  if (amad == -amad) {
-    delta1 = amad / 9998.0;
-    for (loop_ub = 0; loop_ub < 9997; loop_ub++) {
-      y[loop_ub + 1] = (2.0 * ((double)loop_ub + 2.0) - 10000.0) * delta1;
-    }
-    y[4999] = 0.0;
-  } else {
-    delta1 = (amad - amad) / 9998.0;
-    for (loop_ub = 0; loop_ub < 9997; loop_ub++) {
-      y[loop_ub + 1] = amad + ((double)loop_ub + 1.0) * delta1;
-    }
-  }
+  x = fabs(min_x);
+  amad = fabs(min_y);
+  b_linspace(x, x, c_shortcut_course);
   for (i = 0; i < 9999; i++) {
     i1 = i << 1;
-    d = shortcut_course[i1] - y[i];
-    y[i] = d;
+    d = shortcut_course[i1] - c_shortcut_course[i];
+    c_shortcut_course[i] = d;
     shortcut_course[i1] = d;
   }
-  y[9998] = x;
-  y[0] = x;
-  if (x == -x) {
-    delta1 = x / 9998.0;
-    for (loop_ub = 0; loop_ub < 9997; loop_ub++) {
-      y[loop_ub + 1] = (2.0 * ((double)loop_ub + 2.0) - 10000.0) * delta1;
-    }
-    y[4999] = 0.0;
-  } else {
-    delta1 = (x - x) / 9998.0;
-    for (loop_ub = 0; loop_ub < 9997; loop_ub++) {
-      y[loop_ub + 1] = x + ((double)loop_ub + 1.0) * delta1;
-    }
-  }
+  b_linspace(amad, amad, c_shortcut_course);
   /*  正にマージンしていた分を取り除く */
   for (i = 0; i < 9999; i++) {
     i1 = i << 1;
-    d = shortcut_course[i1 + 1] - y[i];
-    y[i] = d;
+    d = shortcut_course[i1 + 1] - c_shortcut_course[i];
+    c_shortcut_course[i] = d;
     shortcut_course[i1 + 1] = d;
-    c_shortcut_course[i] = shortcut_course[i1];
+    d_shortcut_course[i] = shortcut_course[i1];
   }
-  movmean(c_shortcut_course, y);
+  movmean(d_shortcut_course, c_shortcut_course);
   for (i = 0; i < 9999; i++) {
     nx = i << 1;
-    c_shortcut_course[i] = shortcut_course[nx + 1];
-    shortcut_course[nx] = y[i];
+    d_shortcut_course[i] = shortcut_course[nx + 1];
+    shortcut_course[nx] = c_shortcut_course[i];
   }
-  movmean(c_shortcut_course, y);
+  movmean(d_shortcut_course, c_shortcut_course);
   for (i = 0; i < 9999; i++) {
-    shortcut_course[(i << 1) + 1] = y[i];
+    shortcut_course[(i << 1) + 1] = c_shortcut_course[i];
   }
   /*  平滑化のため移動平均を計算 */
 }

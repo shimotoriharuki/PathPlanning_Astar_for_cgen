@@ -5,7 +5,7 @@
  * File: openAroundNodeDP.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 02-Apr-2021 15:28:24
+ * C/C++ source code generated on  : 02-Apr-2021 16:12:11
  */
 
 /* Include Files */
@@ -23,31 +23,7 @@
 /*
      Copyright (C) 2022  Haruki Shimotori. All right reserved.
 */
-/* Function Declarations */
-static double rt_roundd_snf(double u);
-
 /* Function Definitions */
-/*
- * Arguments    : double u
- * Return Type  : double
- */
-static double rt_roundd_snf(double u)
-{
-  double y;
-  if (fabs(u) < 4.503599627370496E+15) {
-    if (u >= 0.5) {
-      y = floor(u + 0.5);
-    } else if (u > -0.5) {
-      y = u * 0.0;
-    } else {
-      y = ceil(u - 0.5);
-    }
-  } else {
-    y = u;
-  }
-  return y;
-}
-
 /*
  * Diagonal prohibition
  *
@@ -372,8 +348,8 @@ void openAroundNodeDP(emxArray_struct_T *map, struct_T open_list[999],
               b_a = goal[1] - y;
               a = a * a + b_a * b_a;
               if (a < 0.0) {
-                rtErrorWithMessageID(4, "sqrt", emlrtRTEI.fName,
-                                     emlrtRTEI.lineNo);
+                b_rtErrorWithMessageID(4, "sqrt", b_emlrtRTEI.fName,
+                                       b_emlrtRTEI.lineNo);
               }
               a = sqrt(a);
               k = map->size[0];

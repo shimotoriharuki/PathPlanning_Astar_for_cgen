@@ -5,7 +5,7 @@
  * File: _coder_generateShortcutPath_api.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 02-Apr-2021 15:28:24
+ * C/C++ source code generated on  : 02-Apr-2021 16:12:11
  */
 
 #ifndef _CODER_GENERATESHORTCUTPATH_API_H
@@ -41,10 +41,11 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void generateShortcutPath(emxArray_real_T *src_course,
+void generateShortcutPath(emxArray_real_T *src_course, real_T range,
                           real_T shortcut_course[19998]);
 
-void generateShortcutPath_api(const mxArray *prhs, const mxArray **plhs);
+void generateShortcutPath_api(const mxArray *const prhs[2],
+                              const mxArray **plhs);
 
 void generateShortcutPath_atexit(void);
 

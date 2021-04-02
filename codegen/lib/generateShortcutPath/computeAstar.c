@@ -5,7 +5,7 @@
  * File: computeAstar.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 02-Apr-2021 15:28:24
+ * C/C++ source code generated on  : 02-Apr-2021 16:12:11
  */
 
 /* Include Files */
@@ -276,7 +276,7 @@ void computeAstar(emxArray_struct_T *map, const double start[2],
   }
   emxFree_real_T(&r);
   if (varargin_2->size[1] != varargin_1->size[1]) {
-    b_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
+    rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
   }
   i = shortcut_course->size[0] * shortcut_course->size[1];
   shortcut_course->size[0] = 2;
